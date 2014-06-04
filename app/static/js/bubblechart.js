@@ -94,20 +94,20 @@
         .data(data)
         .enter()
         .append("circle")
-        .attr("class", "country")
-        .attr("cx", function (d) { return x(d.median_age); })
-        .attr("cy", -80)
-        .attr("r", function (d) { return Math.log(d.gdp); })
+        .attr("class", function(d) { return d.country; })
+//        .attr("cx", function (d) { return x(d.median_age); })
+//        .attr("cy", -80)
+//        .attr("r", function (d) { return Math.log(d.gdp); })
         .style("fill", function (d) { return color(d.country); });
 
     bubbles
-        .transition()
-        .duration(2000)
-        .delay(function (d, i) { return i * 300; })
+//        .transition()
+//        .duration(2000)
+//        .delay(function (d, i) { return i * 300; })
         .attr("cx", function (d) { return x(d.median_age); })
         .attr("cy", function (d) { return y(d.edu_index); })
         .attr("r", function (d) { return Math.log(d.gdp); })
-        .ease("bounce");
+//        .ease("bounce");
 
     // Creating the tooltips for the bubble chart.
     bubbles
@@ -138,28 +138,29 @@
 
     // Text for the bubbles. Should include the Country name or abbr.
     // Text should be centered within bubbles.
-    text = svg.selectAll(".bubbles").append("text")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("class", "bubbles")
-        .attr("x", function (d) { return x(d.median_age); })
-        .attr("y", -80)
-        .attr("dy", ".71em")
-        .style("text-anchor", "middle")
-        .text(function (d) { return d.country; });
-
-    text
-        .transition()
-        .duration(2000)
-        .delay(function (d, i) { return i * 300; })
-        .attr("x", function (d) { return x(d.median_age); })
-        .attr("y", function (d) { return y(d.edu_index); })
-        .attr("dy", ".71em")
-        .style("text-anchor", "middle")
-        .text(function (d) { return d.country; })
-        .ease("bounce")
-        .remove("text", function (d,i) { return i * 3000; });
+//    text = svg.selectAll(".bubbles").append("text")
+//        .data(data)
+//        .enter()
+//        .append("text")
+//        .attr("class", "bubbles")
+//        .attr("x", function (d) { return x(d.median_age); })
+//        .attr("y", function (d) { return y(d.edu_index); })
+////        .attr("y", -80)
+//        .attr("dy", ".71em")
+//        .style("text-anchor", "middle")
+//        .text(function (d) { return d.country; });
+//
+//    text
+//        .transition()
+////        .duration(2000)
+////        .delay(function (d, i) { return i * 300; })
+//        .attr("x", function (d) { return x(d.median_age); })
+//        .attr("y", function (d) { return y(d.edu_index); })
+//        .attr("dy", ".71em")
+//        .style("text-anchor", "middle")
+//        .text(function (d) { return d.country; })
+////        .ease("bounce")
+//        .remove("text", function (d,i) { return i * 3000; });
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
