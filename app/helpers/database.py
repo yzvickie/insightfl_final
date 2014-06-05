@@ -14,36 +14,18 @@ def con_db(host, port, user, passwd, db):
 
     return con
 
-def get_all(con):
+
+def query_db(con, dict):
     data_array = []
 
-    cur = con.cursor()
-    cur.execute(
-        """
-        SELECT id, country, median_age, gdp, edu_index
-        FROM world_index
-        ORDER BY edu_index DESC
-        """
-    )
+    # Request args
+    edu_index = dict["edu_index"]
+    median_age = dict["median_age"]
+    gdp = dict["gdp"]
+    order_by = dict["order_by"]
+    sort = dict["sort"]
 
-    data = cur.fetchall()
-    for country in data:
-        index = {}
-
-        index["id"] = country[0]
-        index["country"] = country[1]
-        index["median_age"] = float(json.dumps(country[2]))
-        index["gdp"] = country[3]
-        index["edu_index"] = float(json.dumps(country[4]))
-
-        data_array.append(index)
-
-    cur.close()
-    return data_array
-
-def world_index(con, country, edu_index, median_age, gdp, order_by, sort):
-    data_array = []
-
+    # Query database
     cur = con.cursor()
     cur.execute(
         """
@@ -69,4 +51,5 @@ def world_index(con, country, edu_index, median_age, gdp, order_by, sort):
         data_array.append(index)
 
     cur.close()
+    con.close()
     return data_array

@@ -17,18 +17,18 @@
           -->
           <div>
             <input id="edu" class="slider"
-                   type="range" min="0.000" max="0.990" step="0.001" value="{{edu_index}}" name="edu_index" />
-            <input id="edu-textbox" class="textbox" type="text" value="{{edu_index}}" maxlength="5" size="20" />
+                   type="range" min="0.000" max="0.990" step="0.001" value="{{settings['edu_index']}}" name="edu_index" />
+            <input id="edu-textbox" class="textbox" type="text" value="{{settings['edu_index']}}" maxlength="5" size="20" />
           </div>
 
           <div>
-            <input id="age" class="slider" type="range" min="0" max="44" value="{{median_age}}" name="median_age" />
-            <input id="age-textbox" class="textbox" type="text" value="{{median_age}}" maxlength="2" />
+            <input id="age" class="slider" type="range" min="0" max="44" value="{{settings['median_age']}}" name="median_age" />
+            <input id="age-textbox" class="textbox" type="text" value="{{settings['median_age']}}" maxlength="2" />
           </div>
 
           <div>
-            <input id="gdp" class="slider" type="range" min="0" max="1000000" step="10000" value="{{gdp}}" name="gdp" />
-            <input id="gdp-textbox" class="textbox" type="text" value="{{gdp}}" maxlength="10" size="20" />
+            <input id="gdp" class="slider" type="range" min="0" max="1000000" step="10000" value="{{settings['gdp']}}" name="gdp" />
+            <input id="gdp-textbox" class="textbox" type="text" value="{{settings['gdp']}}" maxlength="10" size="20" />
           </div>
 
           <select id="order_by" name="order_by">
@@ -71,7 +71,7 @@
               <th>GDP</th>
             </thead>
             <tbody>
-              {% for line in data %}
+              {% for line in settings['data'] %}
               <tr>
                 <td>{{loop.index}}</td>
                 <td class="{{line.country}}">{{line.country}}</td>
@@ -96,7 +96,7 @@
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script>
     // Passing data window; data is global.
-    var data = {{ data | safe }};
+    var data = {{ settings['data'] | safe }};
 
     // Updates the slider when input text values are changed.
     $("#edu-textbox, #age-textbox, #gdp-textbox").on("change", function() {
