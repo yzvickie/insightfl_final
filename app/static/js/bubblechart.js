@@ -15,8 +15,8 @@
         bubbles;
 
     // Establishing chart margins, width, and height.
-    margin = { top: 20, right: 20, bottom: 50, left: 100 },
-    width = 960 - margin.left - margin.right,
+    margin = { top: 20, right: 20, bottom: 50, left: 100 };
+    width = 960 - margin.left - margin.right;
     height = 500 - margin.top - margin.bottom;
 
     // Creating the x scale.
@@ -28,13 +28,13 @@
     // Built in d3 color function.
     color = d3.scale.category20();
 
-    // Function which draws the x axis.
+    // x axis.
     xAxis = d3.svg.axis().scale(x).orient("bottom");
 
-    // Function which draws the y axis.
+    // y axis.
     yAxis = d3.svg.axis().scale(y).orient("left");
 
-    // Drawing the canvas.
+    // SVG canvas.
     svg = d3.select("#chart").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -56,6 +56,7 @@
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis)
+        // x axis label
         .append("text")
         .attr("class", "x label")
         .attr("x", function () { return width/2; })
@@ -68,6 +69,7 @@
     svg.append("g")
         .attr("class", "y axis")
         .call(yAxis)
+        // y axis label
         .append("text")
         .attr("class", "y label")
         .attr("transform", "rotate(-90)")
@@ -77,7 +79,9 @@
         .style("text-anchor", "middle")
         .text("Education Index");
 
-    // Creating clipPath
+    /* Creating clipPath which prevents bubbles from being drawn
+     * outside the SVG container window.
+     */
     svg.append("clipPath")
         .attr("id", "chart-area")
         .append("rect")
@@ -94,20 +98,14 @@
         .data(data)
         .enter()
         .append("circle")
-        .attr("class", function(d) { return d.country; })
-//        .attr("cx", function (d) { return x(d.median_age); })
-//        .attr("cy", -80)
-//        .attr("r", function (d) { return Math.log(d.gdp); })
+        .attr("class", function (d) { return d.country; })
         .style("fill", function (d) { return color(d.country); });
 
+    // Calculating the position of the bubbles on the x and y axis.
     bubbles
-//        .transition()
-//        .duration(2000)
-//        .delay(function (d, i) { return i * 300; })
         .attr("cx", function (d) { return x(d.median_age); })
         .attr("cy", function (d) { return y(d.edu_index); })
-        .attr("r", function (d) { return Math.log(d.gdp); })
-//        .ease("bounce");
+        .attr("r", function (d) { return Math.log(d.gdp); });
 
     // Creating the tooltips for the bubble chart.
     bubbles
@@ -135,32 +133,6 @@
         .on("mouseout", function () {
             d3.select("#tooltip").classed("hidden", true);
         });
-
-    // Text for the bubbles. Should include the Country name or abbr.
-    // Text should be centered within bubbles.
-//    text = svg.selectAll(".bubbles").append("text")
-//        .data(data)
-//        .enter()
-//        .append("text")
-//        .attr("class", "bubbles")
-//        .attr("x", function (d) { return x(d.median_age); })
-//        .attr("y", function (d) { return y(d.edu_index); })
-////        .attr("y", -80)
-//        .attr("dy", ".71em")
-//        .style("text-anchor", "middle")
-//        .text(function (d) { return d.country; });
-//
-//    text
-//        .transition()
-////        .duration(2000)
-////        .delay(function (d, i) { return i * 300; })
-//        .attr("x", function (d) { return x(d.median_age); })
-//        .attr("y", function (d) { return y(d.edu_index); })
-//        .attr("dy", ".71em")
-//        .style("text-anchor", "middle")
-//        .text(function (d) { return d.country; })
-////        .ease("bounce")
-//        .remove("text", function (d,i) { return i * 3000; });
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
