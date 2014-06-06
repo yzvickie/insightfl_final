@@ -110,17 +110,13 @@
     // Creating the tooltips for the bubble chart.
     bubbles
         .on("mouseover", function (d) {
-            var xPosition = parseFloat(d3.select(this).attr("cx"));
-
-            if (d3.select(this).attr("cy") < 140) {
-                var yPosition = parseFloat(d3.select(this).attr("cy")) + 50;
-            } else {
-                var yPosition = parseFloat(d3.select(this).attr("cy")) - 100;
-            }
+            var mousemove = { left: d3.event.pageX, top: d3.event.pageY},
+                scrolltop = document.body.scrollTop,
+                hh = d3.select('#tooltip')[0][0].scrollHeight;
 
             d3.select("#tooltip")
-                .style("left", xPosition + "px")
-                .style("top", yPosition + "px")
+                .style('top', mousemove.top - scrolltop - hh/2 + 'px')
+                .style('left', mousemove.left + 20 + 'px')
                 .select("#value")
                 .html(
                     "Country: " + d.country +
