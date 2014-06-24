@@ -7,8 +7,10 @@ import pymysql
 def create_db(host, user, passwd):
 
     #con = pymysql.connect(host='localhost', user=user, passwd=passwd)
-    con = pymysql.connect(host='localhost', user='root', passwd='1234')
+    con = pymysql.connect(host='localhost', user='root', passwd='****')
     cur = con.cursor()
+    cur.execute('''DROP DATABASE if exists Venturenetwork16;''')
+    cur.execute('''CREATE DATABASE Venturenetwork16;''')
     cur.execute('''USE Venturenetwork16;''')
     cur.execute('''CREATE TABLE Investor_comp (
                      investor_id int NOT NULL, 
