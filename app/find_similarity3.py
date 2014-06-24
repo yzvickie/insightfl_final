@@ -30,9 +30,9 @@ def find_companies(investorname):
         score.append({u'similarity': cosine_similarity(target,row).tolist()[0][0], u'investor_id': investor_id[counter2]})
         counter2 += 1
     #score = sorted(score,reverse=True)
-    con = pymysql.connect(host='localhost', user='root', passwd='****')
+    con = pymysql.connect(host='localhost', user='root', passwd='************')
     cur = con.cursor()
-    cur.execute('''USE Venturenetwork15;''')
+    cur.execute('''USE Venturenetwork*;''')
     current_query='''SELECT startupID FROM Investor_comp'''
     company_total = pd.io.sql.frame_query(current_query, con)
     company_total = list(company_total['startupID'])

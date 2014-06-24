@@ -14,14 +14,14 @@ var fetchData = function() {
 
 		
 	};	
-	$.get('/api/users/' + $('#dayInput').val(), success);
+	$.get('/api/users/' + $('#investorID').val(), success);
 };
 </script>
 </head>
 
 <body>
 Which Investor? 
-<input id="dayInput" type="text"></input>
+<input id="investorID" type="text"></input>
 <button onclick="fetchData();">Get Connected</button>
 <div id="output"></div>
 

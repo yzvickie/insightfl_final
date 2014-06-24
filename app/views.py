@@ -9,7 +9,7 @@ import re
 from find_similarity3 import find_companies
 from operator import itemgetter
 
-conn = con_db("localhost", 3306, "root", "****", "Venturenetwork16")
+conn = con_db("localhost", 3306, "root", "************", "Venturenetwork*")
 
 
 
@@ -62,6 +62,10 @@ def users(investorID):
     return json.dumps(res2)
     #return json.dumps(result)
 
+@app.route('/api/users_test')
+def users_test():
+
+    return render_template('users_test.html')
 
 @app.route('/api/users_test2')
 def users_test2():

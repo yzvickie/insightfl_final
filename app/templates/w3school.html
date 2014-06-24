@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Untitled Document</title>
+<style type="text/css">
+.button {
+border:1px solid #000;
+background:#F00;
+color:#FFF;
+font-weight:bold;
+}
+</style>
+<script type="text/javascript">
+function setTable(what){
+if(document.getElementById(what).style.display=="none"){
+document.getElementById(what).style.display="block";
+}
+else if(document.getElementById(what).style.display=="block"){
+document.getElementById(what).style.display="none";
+}
+}
+</script>
+</head>
+
+<body>
+<!--<a href="#" onclick="setTable('table1');return false">Show/Hide Table</a>-->
+<a href="#" onclick="setTable('table1')">Show/Hide Table</a>
+<table id="table1" style="display:none;">
+	<tr>
+		<td>This table will be hidden on click of the link above it.</td>
+	</tr>
+</table>
+</body>
+</html>

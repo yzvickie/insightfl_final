@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block css %}
+.text-center {
+    text-align: center !important;
+}
+{% endblock %}
+
+{% block content %}
+
+<br>
+<script>
+   var fetchData = function() {
+    function success(responseData) {
+    var mydata = JSON.parse(responseData)
+
+    console.log(mydata);
+    console.log(mydata.length)
+    console.log(mydata[0]['startup_market'])
+    var myTable = document.getElementById('myTable');
+    //for (i=0; i < mydata.length; i++) {
+    for (i=0; i < 10; i++) {
+      var target = '#basicModal'+(i+1);
+      myTable.rows[i+1].cells[1].innerHTML = '<div class="center-block"><a href="#" data-toggle="modal" data-target='+target+'><h4>'+mydata[i]['startup_name']+'</h4></a></div>';
+      //myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i][2] + 'max-width="110px" height="90px" alt="Voluptatem logo"></div>';
+      //myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i][2] + ' height="45px" alt="Voluptatem logo"></div>';
+      myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i]['logolink'] + ' height="50px" alt="Voluptatem logo" class="img-rounded"></div>';
+      myTable.rows[i+1].cells[3].innerHTML = '<div class="center-block"><h4>' + mydata[i]['startup_market']  +' </h4></div>';
+    
+    var image = '#image'+(i+1);
+    $(image).html('<div class="center-block"><img src=' + mydata[i]['logolink'] + 'max-width="110px" height="90px" alt="Voluptatem logo"></div>')
+
+    }
+
+    //$('#output1').html('<div class="center-block"><img src=' + mydata[0][2] + 'max-width="110px" height="90px" alt="Voluptatem logo"></div>')
+    //$('#output2').html('<div class="center-block"><img src=' + mydata[1][2] + 'max-width="110px" height="90px" alt="Voluptatem logo"></div>')
+  };  
+  $.get('/api/users/' + $('#investorID').val(), success);
+};
+ </script>    
+ <script type="text/javascript">
+function setContainer(what){
+if(document.getElementById(what).style.display=="none"){
+document.getElementById(what).style.display="block";
+}
+else if(document.getElementById(what).style.display=="block"){
+document.getElementById(what).style.display="none";
+}
+}
+</script>
+<script>
+ function someFunc() {
+    fetchData();
+    setContainer('myContainer');
+  
+}
+</script> 
+  </div>
+<!--<a href="#" data-toggle="modal" data-target="#basicModal"><h1 id="output1"></h1></a>-->
+
+ <div class="modal fade" id="basicModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal1" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+      <div class="modal-body">
+        <div id="image1"></div>
+        <p> hello</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+      </div>
+    </div>
+
+</div><!-- /.modal -->
+
+<!--<a href="#" data-toggle="modal" data-target="#basicModal"><h1 id="output1"></h1></a>-->
+
+ <div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal2" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+      <div class="modal-body">
+        <div id="image2"></div>
+        <p> hello</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+      </div>
+    </div>
+    
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal3" tabindex="-1" role="dialog" aria-labelledby="basicModal3" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+      <div class="modal-body">
+        <div id="image3"></div>
+        <p> hello</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+      </div>
+    </div>
+    
+</div><!-- /.modal -->
+  <div class="row">
+
+  <div class="row">
+  <div class="span9 offset2">
+    <div class="well">
+      <center><a href="/"><h1 class="splash">VentureNetwork</h1></a>
+      <h2><small>Recommend the best startup for you</small></h2>
+      <br><br>
+      <input style="width: 400px; height:50px; font-size:25px;" 
+      id="investorID" type="text" placeholder="Your name or your firm's name"></input>
+      <button style="font-size:25px; height:50px;" onclick="someFunc();">Recommend!</button>
+    </center>
+</div>
+
+<div class="well" id="myContainer" style="display:none;">
+  <table class="table table-striped" id="myTable">
+        <thead>
+          <tr> <td><div class="center-block"><div class="text-center"><h3>Ranking score</h3></div></div></td> <td><div class="text-center"><h3>Company</h3></div></td> <td><div class="text-center"></div></td> <td><div class="text-left"><h3>Market</h3></div></td> </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="text-center"><h3>1</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>2</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>3</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>4</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>5</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>6</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>7</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>8</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>9</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>10</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+</div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../static/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+{% endblock %}
+
+
