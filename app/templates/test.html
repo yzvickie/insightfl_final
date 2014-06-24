@@ -1,0 +1,25 @@
+
+<script>
+function popupwindow(id) {
+
+// code for Pass the value to modal window
+
+            window.location="#openModal"
+            }
+</script>
+
+<td>
+<input type="submit" name="button" id="<?php echo $row["id"];?>" value="Details" onClick="popupwindow(this.id)">
+<a href="#" data-toggle="modal" data-target="#basicModal">Quaddra Software</a>
+
+
+
+
+</td>
+<div id="openModal" class="modalDialog">
+    <div>
+        <a href="#" title="Close" class="close">X</a>
+        <h2>Modal Box</h2>
+        <!--  From the retrieved values I can query and view data here.-->
+    </div>
+</div>
