@@ -9,7 +9,7 @@ import re
 from find_similarity3 import find_companies
 from operator import itemgetter
 
-conn = con_db("localhost", 3306, "root", "************", "Venturenetwork*")
+conn = con_db("localhost", 3306, "root", "1234", "Venturenetwork16")
 
 
 
